@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="text-sm">
-                  <a href="jajvascript:void(0);" class="text-blue-600 hover:underline font-semibold">
+                  <a href="{{ route('password.request') }}" class="text-blue-600 hover:underline font-semibold">
                     ¿Olvidaste tu Contraseña?
                   </a>
                 </div>

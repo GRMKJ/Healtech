@@ -31,9 +31,14 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="phone" :value="__('Telefono')" />
+            <x-text-input type="text" class="block mt-1 w-full" name="phone" id="phone" placeholder="" pattern="\+?[0-9]{1,4}?[-.\s]?[0-9]{1,3}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,4}[-.\s]?[0-9]{1,9}" maxlength="15" value="{{ old('phone') }}"/>
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="contraseña" :value="__('Contraseña')" />
+            <x-input-label for="password" :value="__('Contraseña')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -45,11 +50,11 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="contraseña_confirm" :value="__('Confirma tu Contraseña')" />
+            <x-input-label for="password_confirm" :value="__('Confirma tu Contraseña')" />
 
-            <x-text-input id="contraseña_confirm" class="block mt-1 w-full"
+            <x-text-input id="password_confirm" class="block mt-1 w-full"
                             type="password"
-                            name="contraseña_confirm" required autocomplete="new-password" />
+                            name="password_confirm" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('contraseña_confirm')" class="mt-2" />
         </div>

@@ -18,7 +18,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
         'phone',
@@ -32,6 +31,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'role'
     ];
 
     /**
@@ -46,4 +46,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function administrador()
+    {
+        return $this->hasOne(Administrador::class, 'userID');
+    }
+
+    public function paciente()
+    {
+        return $this->hasOne(Paciente::class, 'userID');
+    }
+
+    public function operativo()
+    {
+        return $this->hasOne(Operativo::class, 'userID');
+    }
+
+
 }
