@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'role',
     ];
 
     /**
@@ -31,7 +33,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'role'
     ];
 
     /**
@@ -47,17 +48,17 @@ class User extends Authenticatable
         ];
     }
 
-    public function administrador()
+    public function administrador(): HasOne
     {
         return $this->hasOne(Administrador::class, 'userID');
     }
 
-    public function paciente()
+    public function paciente(): HasOne
     {
         return $this->hasOne(Paciente::class, 'userID');
     }
 
-    public function operativo()
+    public function operativo(): HasOne
     {
         return $this->hasOne(Operativo::class, 'userID');
     }
