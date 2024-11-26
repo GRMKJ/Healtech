@@ -1,4 +1,5 @@
 <x-admin-layout>
+
 <div class="container">
     <h1>Editar Operativo</h1>
     <form action="{{ route('operativos.update', $operativo->id) }}" method="POST">
@@ -27,4 +28,5 @@
         <button type="submit" class="btn btn-success">Actualizar</button>
     </form>
 </div>
+
 </x-admin-layout>

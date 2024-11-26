@@ -23,19 +23,19 @@ class AdministradorController extends Controller
         $administrador = Administrador::findOrFail($id);
 
         // Retornar la información del administrador
-        return response()->json($administrador);
+        return view('administradors.show', compact('administrador'));
     }
 
     public function index()
     {
         $administradores = Administrador::with('user')->get();
-        return view('administradores.index', compact('administradores'));
+        return view('administradors.index', compact('administradores'));
     }
 
     // Muestra el formulario para crear un administrador
     public function create()
     {
-        return view('administradores.create');
+        return view('administradors.create');
     }
 
     // Registra un administrador y su usuario
@@ -66,13 +66,13 @@ class AdministradorController extends Controller
             'amaterno' => $request->amaterno,
         ]);
 
-        return redirect()->route('administradores.index')->with('success', 'Administrador registrado exitosamente.');
+        return redirect()->route('administradors.index')->with('success', 'Administrador registrado exitosamente.');
     }
 
     // Muestra el formulario para editar un administrador
     public function edit(Administrador $administrador)
     {
-        return view('administradores.edit', compact('administrador'));
+        return view('administradors.edit', compact('administrador'));
     }
 
     // Actualiza un administrador y su usuario
@@ -100,7 +100,7 @@ class AdministradorController extends Controller
             'amaterno' => $request->amaterno,
         ]);
 
-        return redirect()->route('administradores.index')->with('success', 'Administrador actualizado exitosamente.');
+        return redirect()->route('administradors.index')->with('success', 'Administrador actualizado exitosamente.');
     }
 
     // Elimina un administrador y su usuario asociado
@@ -109,6 +109,6 @@ class AdministradorController extends Controller
         $administrador->user->delete(); // Elimina el usuario relacionado
         $administrador->delete(); // Elimina el registro del administrador
 
-        return redirect()->route('administradores.index')->with('success', 'Administrador eliminado exitosamente.');
+        return redirect()->route('administradors.index')->with('success', 'Administrador eliminado exitosamente.');
     }
 }

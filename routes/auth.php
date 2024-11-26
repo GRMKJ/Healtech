@@ -13,7 +13,7 @@ use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [PacienteController::class, 'create'])
+    Route::get('register', [PacienteController::class, 'createSelf'])
         ->name('register');
 
     Route::post('register', [PacienteController::class, 'registerPaciente']);

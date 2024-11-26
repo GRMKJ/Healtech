@@ -23,7 +23,7 @@ class OperativoController extends Controller
         $operativo = Operativo::findOrFail($id);
 
         // Retornar la información del operativo
-        return response()->json($operativo);
+        return view('operativos.show', compact('operativo'));
     }
 
     public function index()

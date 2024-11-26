@@ -20,7 +20,7 @@
 
         <div class="mt-4">
             <x-input-label for="amaterno" :value="__('Apellido Materno')" />
-            <x-text-input id="amaterno" class="block mt-1 w-full" type="text" name="amaterno" :value="old('apellidom')" required autofocus autocomplete="amaterno" />
+            <x-text-input id="amaterno" class="block mt-1 w-full" type="text" name="amaterno" :value="old('apellidom')" autofocus autocomplete="amaterno" />
             <x-input-error :messages="$errors->get('amaterno')" class="mt-2" />
         </div>
 
