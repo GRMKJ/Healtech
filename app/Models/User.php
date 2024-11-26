@@ -25,6 +25,16 @@ class User extends Authenticatable
         'role',
     ];
 
+    const ROLE_ADMIN = 1;
+    const ROLE_OPERATIVO = 2;
+    const ROLE_PACIENTE = 3;
+
+    // Check if user has a specific role
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
