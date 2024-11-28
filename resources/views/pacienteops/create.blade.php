@@ -1,9 +1,9 @@
-<x-admin-layout>
+<x-opera-layout>
     <div class="flex flex-col items-center justify-center py-6 px-4 bg-gray-100 dark:bg-gray-800">
         <div class="max-w-4xl w-full bg-white dark:bg-gray-700 rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Registrar Paciente</h1>
 
-            <form action="{{ route('pacientes.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('pacienteops.store') }}" method="POST" class="space-y-6">
                 @csrf
 
                 <!-- Datos del Usuario -->
@@ -66,4 +66,4 @@
             </form>
         </div>
     </div>
-</x-admin-layout>
+</x-opera-layout>

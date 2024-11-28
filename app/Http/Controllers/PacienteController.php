@@ -38,11 +38,24 @@ class PacienteController extends Controller
     }
 
 
-    public function index()
-    {
-        $pacientes = Paciente::with('user')->get(); // Asegúrate de tener la relación con el modelo User configurada
-        return view('pacientes.index', compact('pacientes'));
-    }
+    public function index(Request $request)
+{
+    $search = $request->get('search'); // Obtiene el término de búsqueda
+
+    // Realiza la búsqueda de pacientes si se pasa un término de búsqueda
+    $pacientes = Paciente::when($search, function ($query, $search) {
+        return $query->where('nombre', 'like', "%{$search}%")
+                     ->orWhere('apaterno', 'like', "%{$search}%")
+                     ->orWhere('amaterno', 'like', "%{$search}%")
+                     ->orWhereHas('user', function ($query) use ($search) {
+                         $query->where('email', 'like', "%{$search}%")
+                               ->orWhere('phone', 'like', "%{$search}%");
+                     });
+    })->paginate(10);
+
+    return view('pacientes.index', compact('pacientes'));
+}
+
     public function indexop()
     {
         $pacientes = Paciente::with('user')->get(); // Asegúrate de tener la relación con el modelo User configurada

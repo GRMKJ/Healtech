@@ -2,7 +2,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\PacienteController;
-use App\Http\Controllers\PacienteOpController;
+use App\Http\Controllers\PacienteopController;
 use App\Http\Controllers\OperativoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\RoleMiddleware;
@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', RoleMiddleware::class.':'.User::ROLE_OPERATIVO])->group(function () {
-    Route::resource('pacientesop', PacienteOpController::class);
+    Route::resource('pacienteops', PacienteopController::class);
 });
 
 Route::middleware(['auth', RoleMiddleware::class.':'.User::ROLE_ADMIN])->group(function () {

@@ -26,11 +26,25 @@ class OperativoController extends Controller
         return view('operativos.show', compact('operativo'));
     }
 
-    public function index()
-    {
-        $operativos = Operativo::with('user')->get();
-        return view('operativos.index', compact('operativos'));
-    }
+    public function index(Request $request)
+{
+    $search = $request->get('search'); // Obtiene el término de búsqueda
+
+    // Realiza la búsqueda de pacientes si se pasa un término de búsqueda
+    $operativos = Operativo::when(
+
+        $search, function ($query, $search) {
+        return $query->where('nombre', 'like', "%{$search}%")
+                     ->orWhere('apaterno', 'like', "%{$search}%")
+                     ->orWhere('amaterno', 'like', "%{$search}%")
+                     ->orWhereHas('user', function ($query) use ($search) {
+                         $query->where('email', 'like', "%{$search}%")
+                               ->orWhere('phone', 'like', "%{$search}%");
+                     });
+    })->paginate(10);
+
+    return view('operativos.index', compact('operativos'));
+}
 
     // Muestra el formulario para crear un operativo
     public function create()

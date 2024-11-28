@@ -26,12 +26,23 @@ class AdministradorController extends Controller
         return view('administradors.show', compact('administrador'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $administradores = Administrador::with('user')->get();
-        return view('administradors.index', compact('administradores'));
-    }
+        $search = $request->get('search'); // Obtiene el término de búsqueda
 
+        // Realiza la búsqueda de pacientes si se pasa un término de búsqueda
+        $administradors = Administrador::when($search, function ($query, $search) {
+            return $query->where('nombre', 'like', "%{$search}%")
+                         ->orWhere('apaterno', 'like', "%{$search}%")
+                         ->orWhere('amaterno', 'like', "%{$search}%")
+                         ->orWhereHas('user', function ($query) use ($search) {
+                             $query->where('email', 'like', "%{$search}%")
+                                   ->orWhere('phone', 'like', "%{$search}%");
+                         });
+        })->paginate(10);
+
+        return view('administradors.index', compact('administradors'));
+    }
     // Muestra el formulario para crear un administrador
     public function create()
     {
