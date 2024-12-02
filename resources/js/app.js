@@ -19,3 +19,40 @@ document.addEventListener('keydown', (e) => {
         alert('Acción no permitida');
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const passwordInput = document.getElementById('password');
+    const popup = document.getElementById('passwordPopup');
+    const rules = {
+        lengthRule: (password) => password.length >= 8,
+        uppercaseRule: (password) => /[A-Z]/.test(password),
+        numberRule: (password) => /[0-9]/.test(password),
+        specialCharRule: (password) => /[!@#$%^&*(),.?":{}|<>]/.test(password),
+    };
+
+    // Mostrar el popup al hacer foco en el campo
+    passwordInput.addEventListener('focus', function () {
+        popup.classList.remove('hidden');
+    });
+
+    // Ocultar el popup al salir del campo
+    passwordInput.addEventListener('blur', function () {
+        popup.classList.add('hidden');
+    });
+
+    // Validar reglas en tiempo real
+    passwordInput.addEventListener('input', function () {
+        const password = passwordInput.value;
+
+        for (const [ruleId, validationFn] of Object.entries(rules)) {
+            const ruleElement = document.getElementById(ruleId);
+            if (validationFn(password)) {
+                ruleElement.classList.remove('text-red-600');
+                ruleElement.classList.add('text-green-600');
+            } else {
+                ruleElement.classList.remove('text-green-600');
+                ruleElement.classList.add('text-red-600');
+            }
+        }
+    });
+});

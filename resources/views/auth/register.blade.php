@@ -37,15 +37,24 @@
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mt-4 relative">
             <x-input-label for="password" :value="__('Contraseña')" />
-
             <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+                        type="password"
+                        name="password"
+                        required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <!-- Popup -->
+            <div id="passwordPopup" class="hidden absolute top-full mt-2 bg-white p-4 rounded shadow-md border border-gray-300 w-80">
+                <h2 class="text-sm font-semibold mb-2">{{ __('Requisitos de la Contraseña') }}</h2>
+                <ul id="passwordRules" class="list-disc ml-5 text-sm">
+                    <li id="lengthRule" class="text-red-600">{{ __('Al menos 8 caracteres') }}</li>
+                    <li id="uppercaseRule" class="text-red-600">{{ __('Al menos una letra mayúscula') }}</li>
+                    <li id="numberRule" class="text-red-600">{{ __('Al menos un número') }}</li>
+                    <li id="specialCharRule" class="text-red-600">{{ __('Al menos un carácter especial') }}</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Confirm Password -->
