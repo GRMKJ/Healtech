@@ -23,14 +23,6 @@ Route::get('auth/facebook/callback', [AuthController::class, 'handleFacebookCall
 
 Route::get('/dashboard', function () {
     $user = Auth::user();
-
-    $layout = match ($user->role) {
-        User::ROLE_ADMIN => 'layouts.admin',
-        User::ROLE_OPERATIVO => 'layouts.operativo',
-        User::ROLE_PACIENTE => 'layouts.app',
-        default => 'layouts.guest',
-    };
-
     if (!$user) {
         return redirect('auth/login');
     }

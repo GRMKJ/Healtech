@@ -27,10 +27,20 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'siempre' => ['required', 'email'],
+            'juntos' => ['required', 'string'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'siempre.required' => 'El campo de correo es obligatorio.',
+            'siempre.email' => 'Por favor, introduce un correo válido.',
+            'juntos.required' => 'La contraseña es obligatoria.',
+        ];
+    }
+
 
     /**
      * Attempt to authenticate the request's credentials.
